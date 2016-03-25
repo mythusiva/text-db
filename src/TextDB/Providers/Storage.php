@@ -29,7 +29,7 @@ class Storage
 
 	private function connectToDB() {
 		$factory = new ConnectionFactory();
-		$this->dbConnection = $factory->make($this->dbConfiguration);
+		$this->dbConnection = $factory->make((array)$this->dbConfiguration);
 	}
 
 
