@@ -10,18 +10,19 @@ class Message
 {
 	
 	/**
-	 * @var string $message
-	 */
-	protected $message;
-
-	/**
-	 * @var string $identifier
+	 * @var string
 	 */
 	protected $identifier;
 
 	/**
-	 * @var string $text
+	 * @var string
 	 */
 	protected $text;
+
+
+	/**
+	 * @var string The language code of the text.
+	 */
+	protected $locale;
 
 }

@@ -6,7 +6,7 @@ namespace TextDB\Service;
 /**
 * 
 */
-class Message
+class CatalogueMessage
 {
 	
 	
