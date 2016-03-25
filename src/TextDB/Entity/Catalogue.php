@@ -1,6 +1,6 @@
 <?php
 
-namespace TextDB\Message;
+namespace TextDB\Entity;
 
 
 use DateTime;
