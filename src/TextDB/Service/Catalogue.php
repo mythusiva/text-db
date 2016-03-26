@@ -2,6 +2,7 @@
 
 namespace TextDB\Service;
 
+
 use TextDB\Service\BaseService;
 use TextDB\Entity\Catalogue as CatalogueEntity;
 use TextDB\Model\Catalogue as CatalogueModel;
@@ -21,7 +22,7 @@ class Catalogue extends BaseService
 	{
 		parent::__construct($dependencies);
 
-		$this->catalogueModel = $this->dependencies['catalogModel'];
+		$this->catalogueModel = $this->dependencies['catalogueModel'];
 	}
 
 	/**
@@ -31,6 +32,18 @@ class Catalogue extends BaseService
 
 		$this->catalogueModel->createCatalogue($name);
 
+		$catalogue = $this->catalogueModel->getCatalogue($name);
+
+		var_dump($catalogue);
+
+	}
+
+	/**
+	 * @param  string $name
+	 * @return CatalogueEntity
+	 */
+	public function get($name) {
+		return $this->catalogueModel->getCatalogue($name)
 	}
 
 }

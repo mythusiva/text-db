@@ -14,14 +14,27 @@ use TextDB\Entity\Catalogue as CatalogueEntity;
 class Message extends BaseModel
 {
 
-	function __construct(StorageProvider $storage)
+	function __construct($dependencies)
 	{
-		$this->__construct($storage);
+		parent::__construct($dependencies);
 	}
 
+	/**
+	 * @param  string $identifier
+	 * @param  string $text
+	 * @param  string $locale
+	 * @param  int $catalogFK
+	 */
 	public function createMessage(MessageEntity $message) {
-		$data = (array) $message;
-		$this->dbConnection->table('message')->insertIgnore($data);
+		$data = [
+			'identifier' => $message->identifier,
+			'text' => $message->text,
+			'locale' => $message->locale,
+			'catalogue_fk' => $message->catalogueFK
+		];
+		$this->dbConnection
+			 ->table('message')
+			 ->insertIgnore($data);
 	}
 
 }

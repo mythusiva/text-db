@@ -3,35 +3,48 @@
 namespace TextDB\Entity;
 
 
+use TextDB\Utils\Properties;
+
 /**
 * 
 */
 class Message
 {
+	/**
+	 * @param array
+	 */
+	function __construct(Properties $properties)
+	{
+		$this->messagePK 	= $properties->getValue('messagePK',null);
+		$this->identifier 	= $properties->getValue('identifier','');
+		$this->text 		= $properties->getValue('text','');
+		$this->locale 		= $properties->getValue('locale','');
+		$this->catalogueFK 	= $properties->getValue('catalogueFK',null);
+	}
+
 	/** 
 	 * @var int
 	 */
-	protected $messagePK;
+	public $messagePK;
 	
 	/**
 	 * @var string
 	 */
-	protected $identifier;
+	public $identifier;
 
 	/**
 	 * @var string
 	 */
-	protected $text;
-
+	public $text;
 
 	/**
 	 * @var string The language code of the text.
 	 */
-	protected $locale;
+	public $locale;
 
 	/** 
 	 * @var int
 	 */
-	protected $catalogueFK;
+	public $catalogueFK;
 
 }

@@ -26,15 +26,44 @@ class Database
 		$this->lazy 		= $properties->getValue('lazy',true);
 		$this->options 		= $properties->getValue('options',[]);
 	}
-
+	/**
+	 * @var string
+	 */
 	public $driver;
+	/**
+	 * @var string
+	 */
 	public $username;
+	/**
+	 * @var string
+	 */
 	public $password;
-	public $host; # not for sqlite
-	public $database; # database path for sqlite
+	/**
+	 * Not used for sqlite
+	 * @var string
+	 */
+	public $host;
+	/**
+	 * Used only for sqlite
+	 * @var string
+	 */
+	public $database;
+	/**
+	 * @var string
+	 */
 	public $charset;
+	/**
+	 * @var string
+	 */
 	public $collation;
+	/**
+	 * @var bool
+	 */
 	public $lazy;
+	/**
+	 * @var array
+	 */
 	public $options;
+
 
 }

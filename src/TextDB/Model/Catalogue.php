@@ -17,17 +17,39 @@ class Catalogue extends BaseModel
 		parent::__construct($dependencies);
 	}
 
+	function getCatalogue($catalogueName) {
+
+		$row = $this->dbConnection
+					->table('catalogue')
+					->where('name','=',$catalogueName)
+					->first();
+
+		return $this->convertToEntity($row);
+	}
+
 	/**
 	 * @param  string $catalogueName
-	 * @return bool
 	 */
 	function createCatalogue($catalogueName) {
 		$data = [
 			'name' => $catalogueName
 		];
 
-		$this->dbConnection->table('catalogue')->insertIgnore($data);
-		return true;
+		$this->dbConnection
+			->table('catalogue')
+			->insertIgnore($data);
+	}
+
+
+	protected function convertToEntity($row) {
+		$catalogueEntity = parent::convertToEntity(CatalogueEntity::class,[
+ 			'cataloguePK' => $row['catalogue_pk'],
+ 			'catalogueTitle' => $row['name']
+		]);
+		# Maintained only by the DB triggers.
+		$catalogueEntity->dateCreated = $row['date_created'];
+
+		return $catalogueEntity;
 	}
 
 }

@@ -6,7 +6,9 @@ use TextDB\Utils\Properties;
 use TextDB\Entity\Database as DatabaseEntity;
 use TextDB\Provider\Storage as StorageProvider;
 use TextDB\Model\Catalogue as CatalogueModel;
+use TextDB\Model\Message as MessageModel;
 use TextDB\Service\Catalogue as CatalogueService;
+use TextDB\Service\CatalogueMessage as CatalogueMessageService;
 
 $databasePath = realpath(__DIR__ . '/../data/default.s3db');
 
@@ -23,12 +25,21 @@ $dependencyContainer['databaseEntity'] = $dependencyContainer->share(function($c
 $dependencyContainer['storageProvider'] = $dependencyContainer->share(function($c) {
 	return new StorageProvider($c);
 });
-$dependencyContainer['catalogModel'] = $dependencyContainer->share(function($c) {
+$dependencyContainer['catalogueModel'] = $dependencyContainer->share(function($c) {
 	return new CatalogueModel($c);
 });
+$dependencyContainer['messageModel'] = $dependencyContainer->share(function($c) {
+	return new MessageModel($c);
+});
+
 
 /**
- * @var CatalogueService
+ * @var CatalogueMessageService
  */
-$catalogueService = new CatalogueService($dependencyContainer);
-$catalogueService->create($name="test1-catalogue");
+$catalogueMessageService = new CatalogueMessageService($dependencyContainer);
+$catalogueMessageService->createCatalogueMessage(
+  	$catalogueName = 'test1-catalogue',
+  	'homepage-text',
+  	'welcome to the homepage',
+  	'en-US'
+);
