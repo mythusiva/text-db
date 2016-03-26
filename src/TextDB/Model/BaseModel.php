@@ -1,15 +1,31 @@
 <?php
 
+namespace TextDB\Model;
+
+
+use Database\Connection;
+use Pimple;
+
 /**
 * 
 */
 class BaseModel
 {
+	/**
+	 * @var Pimple
+	 */
+	protected $dependencies;
 
+	/** 
+	 * @var Connection
+	 */
 	protected $dbConnection;
-	
-	function __construct(StorageProvider $storageProvider)
+
+
+	function __construct($dependencies)
 	{
-		$this->dbConnection = $storageProvider->getDB;
+		$this->dependencies = $dependencies;
+
+		$this->dbConnection = $this->dependencies['storageProvider']->getDB();
 	}
 }

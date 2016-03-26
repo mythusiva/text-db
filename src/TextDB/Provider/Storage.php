@@ -1,29 +1,34 @@
 <?php
-namespace TextDB\Providers;
 
-
-require __DIR__ . '/../../..' . '/vendor/autoload.php';
+namespace TextDB\Provider;
 
 
 use TextDB\Entity\Database as DatabaseConfig;
 use \Database\Connectors\ConnectionFactory;
+use Database\Connection;
 
 /**
-* A single database storage provider. This will be responsible
-* for setting up a database if the database doesnt exist.
-* Also getting data from said database.
+* 
 */
-class Storage
+class Storage extends BaseProvider
 {
 
-	/** @var DatabaseConfig */
+	/** 
+	 * @var DatabaseConfig
+	 */
 	private $dbConfiguration;
 
+	/**
+	 * @var Connection
+	 */
 	private $dbConnection;
-	
-	function __construct(DatabaseConfig $dbConfig)
+
+	function __construct($dependencies)
 	{
-		$this->dbConfiguration = $dbConfig;
+		parent::__construct($dependencies);
+
+		$this->dbConfiguration = $this->dependencies['databaseEntity'];
+
 		$this->connectToDB();
 	}
 
@@ -32,7 +37,9 @@ class Storage
 		$this->dbConnection = $factory->make((array)$this->dbConfiguration);
 	}
 
-
+	/**
+	 * @return Connection
+	 */
 	function getDB() {
 		return $this->dbConnection;
 	}

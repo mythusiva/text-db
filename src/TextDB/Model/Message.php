@@ -2,9 +2,11 @@
 
 namespace TextDB\Model;
 
+
 use TextDB\Model\BaseModel;
 use TextDB\Provider\Storage as StorageProvider;
 use TextDB\Entity\Message as MessageEntity;
+use TextDB\Entity\Catalogue as CatalogueEntity;
 
 /**
 * 

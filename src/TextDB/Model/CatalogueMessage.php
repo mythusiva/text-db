@@ -2,6 +2,7 @@
 
 namespace TextDB\Model;
 
+
 use TextDB\Model\BaseModel;
 use TextDB\Provider\Storage as StorageProvider;
 use TextDB\Entity\Catalogue as CatalogueEntity;
@@ -18,6 +19,6 @@ class CatalogueMessage extends BaseModel
 	}
 
 	function getCatalogueMessages(CatalogueEntity $catalogue) {
-		
+
 	}
 }

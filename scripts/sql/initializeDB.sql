@@ -9,12 +9,6 @@ CREATE TABLE [catalogue] (
 [date_created] TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
-CREATE TABLE [catalogue_message] (
-[catalogue_fk] INTEGER  NOT NULL,
-[message_fk] INTEGER  NOT NULL,
-PRIMARY KEY ([catalogue_fk],[message_fk])
-);
-
 CREATE TABLE [context] (
 [context_pk] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
 [text] TEXT  NOT NULL,
@@ -22,14 +16,26 @@ CREATE TABLE [context] (
 );
 
 CREATE TABLE [message] (
-[message_pk] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
+[message_pk] INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL,
 [identifier] VARCHAR(255)  NOT NULL,
 [text] TEXT  NOT NULL,
+[catalogue_fk] INTEGER  NOT NULL,
+[locale] VARCHAR(16)  NOT NULL,
 [date_created] TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
 [date_modified] TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
-CREATE UNIQUE INDEX [IDX_CATALOGUE_MESSAGE_] ON [catalogue_message](
+CREATE UNIQUE INDEX [IDX_MESSAGE_] ON [message](
 [catalogue_fk]  ASC,
-[message_fk]  ASC
+[identifier]  ASC,
+[locale]  ASC
 );
+
+CREATE TRIGGER [ON_TBL_MESSAGE_date_modified] 
+AFTER UPDATE ON [message] 
+FOR EACH ROW 
+BEGIN 
+
+UPDATE message SET date_modified = NOW() WHERE message_pk = old.message_pk;
+
+END;

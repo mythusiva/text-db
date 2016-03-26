@@ -1,7 +1,6 @@
 <?php
 
-namespace TextDB\Providers;
-
+namespace TextDB\Provider;
 
 use TextDB\Entity\Catalogue as CatalogueEntity;
 use TextDB\Entity\Message as MessageEntity;
@@ -9,29 +8,26 @@ use TextDB\Entity\Message as MessageEntity;
 /**
 *
 */
-class Translation
+class Translation extends BaseProvider
 {
-	/** @var CatalogueEntity */
+	/**
+	 * @var CatalogueEntity
+	 */
 	private $catalogue;
 
-
+	/**
+	 * @var array
+	 */
 	private $loadedMessages;
 
-
+	/**
+	 * @param CatalogueEntity $catalogue
+	 */
 	function __construct(CatalogueEntity $catalogue)
 	{
 		
 		$this->catalogue = $catalogue;
 
 	}
-
-
-	function loadMessages() {
-
-		
-		
-	}
-
-
 
 }
