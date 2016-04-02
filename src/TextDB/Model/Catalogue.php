@@ -27,6 +27,19 @@ class Catalogue extends BaseModel
 		return $this->convertToEntity($row);
 	}
 
+	function getCatalogueList() {
+		$rows = $this->dbConnection
+					 ->table('catalogue')
+					 ->get();
+
+		$calalogueList = [];
+		foreach ($rows as $rowArray) {
+			$catalogueList[] = $this->convertToEntity($rowArray);
+		}
+
+		return $catalogueList;
+	}
+
 	/**
 	 * @param  string $catalogueName
 	 */
