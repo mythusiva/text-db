@@ -21,31 +21,6 @@ $app = new Silex\Application();
 $app['debug'] = true;
 
 ### DEPENDENCIES ###
-// $dependencyContainer = new Pimple();
-// $dependencyContainer['settings'] = function($c) use ($settings) {
-// 	return $settings;
-// };
-// $dependencyContainer['databaseProperties'] = function($c) {
-// 	return new Properties($c['settings']['dbProperties']);
-// };
-// $dependencyContainer['databaseEntity'] = function($c) {
-// 	return new DatabaseEntity($c['databaseProperties']);
-// };
-// # StorageProvider is a shared resource.
-// $dependencyContainer['storageProvider'] = $dependencyContainer->share(function($c) {
-// 	return new StorageProvider($c);
-// });
-
-// $dependencyContainer['catalogueModel'] = $dependencyContainer->share(function($c) {
-// 	return new CatalogueModel($c);
-// });
-// $dependencyContainer['messageModel'] = $dependencyContainer->share(function($c) {
-// 	return new MessageModel($c);
-// });
-// $dependencyContainer['catalogueMessageModel'] = $dependencyContainer->share(function($c) {
-// 	return new CatalogueMessageModel($c);
-// });
-
 $app['settings'] = function($c) use ($settings) {
 	return $settings;
 };
@@ -101,7 +76,7 @@ $app->get('/fetchTextsByCatalogue/{catalogueName}', function(Silex\Application $
 });
 
 $app->get('/fetchListOfCatalogues', function() use ($app) {
-
+	return "";
 });
 
 $app->run();
