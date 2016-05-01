@@ -16,16 +16,11 @@ class Catalogue
 	 */
 	function __construct(Properties $properties)
 	{
-		$this->cataloguePK		= $properties->getValue('cataloguePK',null);
-		$this->catalogueTitle 	= $properties->getValue('catalogueTitle',null);
+		$this->catalogueName 	= $properties->getValue('catalogueName',null);
 	}
 
 	/**
-	 * @var int
-	 */
-	public $cataloguePK;
-	/**
 	 * @var string
 	 */
-	public $catalogueTitle;
+	public $catalogueName;
 }

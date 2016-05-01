@@ -56,8 +56,7 @@ class Catalogue extends BaseModel
 
 	protected function convertToEntity($row) {
 		$catalogueEntity = parent::convertToEntity(CatalogueEntity::class,[
- 			'cataloguePK' => $row['catalogue_pk'],
- 			'catalogueTitle' => $row['name']
+ 			'catalogueName' => $row['name']
 		]);
 		# Maintained only by the DB triggers.
 		$catalogueEntity->dateCreated = $row['date_created'];

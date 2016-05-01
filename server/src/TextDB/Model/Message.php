@@ -27,23 +27,36 @@ class Message extends BaseModel
 	 */
 	public function createMessage(MessageEntity $message) {
 		$data = [
-			'identifier' 	=> $message->identifier,
-			'text' 			=> $message->text,
-			'locale' 		=> $message->locale,
-			'catalogue_fk'  => $message->catalogueFK
+			'identifier' 		=> $message->identifier,
+			'text' 				=> $message->text,
+			'locale' 			=> $message->locale,
+			'catalogue_name'  	=> $message->catalogueName
 		];
 		$this->dbConnection
 			 ->table('message')
 			 ->insertIgnore($data);
 	}
 
+	function getMessageList() {
+		$rows = $this->dbConnection
+					 ->table('catalogue')
+					 ->get();
+
+		$calalogueList = [];
+		foreach ($rows as $rowArray) {
+			$catalogueList[] = $this->convertToEntity($rowArray);
+		}
+
+		return $catalogueList;
+	}
+
 	protected function convertToEntity($row) {
 		$messageEntity = parent::convertToEntity(MessageEntity::class,[
- 			'messagePK'   => $row['message_pk'],
- 			'identifier'  => $row['identifier'],
- 			'text' 		  => $row['text'],
- 			'locale' 	  => $row['locale'],
- 			'catalogueFK' => $row['catalogueFK']
+ 			'messagePK'   	=> $row['message_pk'],
+ 			'identifier'  	=> $row['identifier'],
+ 			'text' 		  	=> $row['text'],
+ 			'locale' 	  	=> $row['locale'],
+ 			'catalogueName' => $row['catalogue_name']
 		]);
 		
 		# Maintained only by the DB triggers.

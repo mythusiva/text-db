@@ -15,11 +15,11 @@ class Message
 	 */
 	function __construct(Properties $properties)
 	{
-		$this->messagePK 	= $properties->getValue('messagePK',null);
-		$this->identifier 	= $properties->getValue('identifier','');
-		$this->text 		= $properties->getValue('text','');
-		$this->locale 		= $properties->getValue('locale','');
-		$this->catalogueFK 	= $properties->getValue('catalogueFK',null);
+		$this->messagePK 	 = $properties->getValue('messagePK',null);
+		$this->identifier 	 = $properties->getValue('identifier','');
+		$this->text 		 = $properties->getValue('text','');
+		$this->locale 		 = $properties->getValue('locale','');
+		$this->catalogueName = $properties->getValue('catalogueName',null);
 	}
 
 	/** 
@@ -43,8 +43,8 @@ class Message
 	public $locale;
 
 	/** 
-	 * @var int
+	 * @var string The catalogue name is a foreign key.
 	 */
-	public $catalogueFK;
+	public $catalogueName;
 
 }
