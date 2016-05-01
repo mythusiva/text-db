@@ -13,6 +13,7 @@ return array(
     'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
     'Symfony\\Component\\Debug\\' => array($vendorDir . '/symfony/debug'),
     'Silex\\' => array($vendorDir . '/silex/silex/src/Silex'),
+    'League\\Plates\\' => array($vendorDir . '/league/plates/src'),
     'Database\\' => array($vendorDir . '/mrjgreen/database/src'),
     'Cake\\Collection\\' => array($vendorDir . '/cakephp/collection'),
 );

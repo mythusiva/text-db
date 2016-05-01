@@ -2,7 +2,8 @@
     "require": {
         "silex/silex": "~1.3",
         "cakephp/collection": "^3.2",
-        "mrjgreen/database": "^2.5"
+        "mrjgreen/database": "^2.5",
+        "league/plates": "^3.1"
     },
     "autoload": {
         "psr-0": {
