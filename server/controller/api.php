@@ -6,13 +6,15 @@ include_once __DIR__ . '/../config/settings.php';
 
 use Symfony\Component\HttpFoundation\Request;
 use TextDB\Utils\Properties;
-use TextDB\Entity\Database as DatabaseEntity;
 use TextDB\Provider\Storage as StorageProvider;
+use TextDB\Entity\Database as DatabaseEntity;
 use TextDB\Entity\Message as MessageEntity;
+use TextDB\Entity\Catalogue as CatalogueEntity;
 use TextDB\Service\CatalogueMessage as CatalogueMessageService;
 use TextDB\Model\CatalogueMessage as CatalogueMessageModel;
 use TextDB\Model\Catalogue as CatalogueModel;
 use TextDB\Model\Message as MessageModel;
+use TextDB\Service\Catalogue as CatalogueService;
 use Symfony\Component\HttpFoundation\JsonResponse as APIResponse;
 
 ### APPLICATION ###
@@ -46,6 +48,9 @@ $app['catalogueMessageModel'] = $app->share(function($c) {
 $app['catalogueMessageService'] = $app->share(function($c) {
 	return new CatalogueMessageService($c);
 });
+$app['catalogueService'] = $app->share(function($c) {
+	return new CatalogueService($c);
+});
 
 
 
@@ -75,8 +80,20 @@ $app->get('/fetchTextsByCatalogue/{catalogueName}', function(Silex\Application $
 	); 
 });
 
+/**
+ * API Endpoint
+ * @return  CatalogueEntity[]	Returns a list of catalogueEntities.
+ */
 $app->get('/fetchListOfCatalogues', function() use ($app) {
-	return "";
+	$listOfCatalogues = $app['catalogueService']->getList();
+
+	$responseCode = APIResponse::HTTP_OK;
+	if(empty($listOfCatalogues)) {
+		$responseCode = APIResponse::HTTP_NOT_FOUND;
+	}
+	return APIResponse::create(
+		$listOfCatalogues, $responseCode
+	); 
 });
 
 $app->run();

@@ -41,7 +41,11 @@ class Catalogue extends BaseService
 	 * @return CatalogueEntity
 	 */
 	public function get($name) {
-		return $this->catalogueModel->getCatalogue($name)
+		return $this->catalogueModel->getCatalogue($name);
+	}
+
+	public function getList() {
+		return $this->catalogueModel->getCatalogueList();
 	}
 
 }
