@@ -8,12 +8,13 @@ use Symfony\Component\HttpFoundation\Request;
 use TextDB\Utils\Properties;
 use TextDB\Provider\Storage as StorageProvider;
 use TextDB\Entity\Database as DatabaseEntity;
-use TextDB\Entity\Message as MessageEntity;
-use TextDB\Entity\Catalogue as CatalogueEntity;
-use TextDB\Service\CatalogueMessage as CatalogueMessageService;
 use TextDB\Model\CatalogueMessage as CatalogueMessageModel;
-use TextDB\Model\Catalogue as CatalogueModel;
+use TextDB\Service\CatalogueMessage as CatalogueMessageService;
+use TextDB\Entity\Message as MessageEntity;
 use TextDB\Model\Message as MessageModel;
+use TextDB\Service\Message as MessageService;
+use TextDB\Entity\Catalogue as CatalogueEntity;
+use TextDB\Model\Catalogue as CatalogueModel;
 use TextDB\Service\Catalogue as CatalogueService;
 use Symfony\Component\HttpFoundation\JsonResponse as APIResponse;
 
@@ -39,17 +40,20 @@ $app['storageProvider'] = $app->share(function($c) {
 $app['catalogueModel'] = $app->share(function($c) {
 	return new CatalogueModel($c);
 });
+$app['catalogueService'] = $app->share(function($c) {
+	return new CatalogueService($c);
+});
 $app['messageModel'] = $app->share(function($c) {
 	return new MessageModel($c);
+});
+$app['messageService'] = $app->share(function($c) {
+	return new MessageService($c);
 });
 $app['catalogueMessageModel'] = $app->share(function($c) {
 	return new CatalogueMessageModel($c);
 });
 $app['catalogueMessageService'] = $app->share(function($c) {
 	return new CatalogueMessageService($c);
-});
-$app['catalogueService'] = $app->share(function($c) {
-	return new CatalogueService($c);
 });
 
 
@@ -93,6 +97,23 @@ $app->get('/fetchListOfCatalogues', function() use ($app) {
 	}
 	return APIResponse::create(
 		$listOfCatalogues, $responseCode
+	); 
+});
+
+
+/**
+ * API Endpoint
+ * @return  MessageEntity[]	Returns a list of catalogueEntities.
+ */
+$app->get('/fetchAllMessages', function() use ($app) {
+	$listOfMessages = $app['messageService']->getList();
+
+	$responseCode = APIResponse::HTTP_OK;
+	if(empty($listOfMessages)) {
+		$responseCode = APIResponse::HTTP_NOT_FOUND;
+	}
+	return APIResponse::create(
+		$listOfMessages, $responseCode
 	); 
 });
 

@@ -6,7 +6,6 @@ namespace TextDB\Model;
 use TextDB\Model\BaseModel;
 use TextDB\Provider\Storage as StorageProvider;
 use TextDB\Entity\Message as MessageEntity;
-use TextDB\Entity\Catalogue as CatalogueEntity;
 
 /**
 * 
@@ -20,10 +19,7 @@ class Message extends BaseModel
 	}
 
 	/**
-	 * @param  string $identifier
-	 * @param  string $text
-	 * @param  string $locale
-	 * @param  int $catalogueFK
+	 * @param  MessageEntity $message
 	 */
 	public function createMessage(MessageEntity $message) {
 		$data = [
@@ -37,17 +33,33 @@ class Message extends BaseModel
 			 ->insertIgnore($data);
 	}
 
-	function getMessageList() {
+	/**
+	 * @param  string 			$messageIdentifier
+	 * @return MessageEntity
+	 */
+	public function getMessage($messageIdentifier) {
+		$row = $this->dbConnection
+					->table('message')
+					->where('identifier','=',$messageIdentifier)
+					->first();
+
+		return $this->convertToEntity($row);
+	}
+
+	/**
+	 * @return MessageEntity[]
+	 */
+	public function getMessageList() {
 		$rows = $this->dbConnection
-					 ->table('catalogue')
+					 ->table('message')
 					 ->get();
 
-		$calalogueList = [];
+		$messageList = [];
 		foreach ($rows as $rowArray) {
-			$catalogueList[] = $this->convertToEntity($rowArray);
+			$messageList[] = $this->convertToEntity($rowArray);
 		}
 
-		return $catalogueList;
+		return $messageList;
 	}
 
 	protected function convertToEntity($row) {
