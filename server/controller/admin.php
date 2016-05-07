@@ -18,18 +18,20 @@ $app['viewService'] = $app->share(function() use ($app) {
 
 Request::setTrustedProxies($settings['trustedProxies']);
 
-$app->get('/', function () {
-    $output = 'Hello Admin!';
-
-    return $output;
-});
-
-$app->get('/admin', function () use ($app) {
+$app->get('/', function () use ($app) {
 	$app['viewService']->addData([
-		'pageTitle' => 'Admin Homepage'
+		'pageTitle' => 'Admin'
 	]);
 
     return $app['viewService']->render('admin/admin_home');
+});
+
+$app->get('/catalogue', function() use ($app) {
+	$app['viewService']->addData([
+		'pageTitle' => 'Catalogue - Admin'
+	]);
+
+	return $app['viewService']->render('admin/catalogue_home');
 });
 
 

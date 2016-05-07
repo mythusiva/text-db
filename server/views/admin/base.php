@@ -17,19 +17,21 @@
 	  
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-</head>
-<body>  
 
-	<div class="row">
-		<div class="col s3">
-			<ul id="side-menu" class="">
-		      <li><a href="#!">Overview</a></li>
-		      <li><a href="#!">Catalogues</a></li>
+</head>
+<body class="blue-grey lighten-4">  
+
+	<div class="container row">
+		<div class="col s2">
+			<br/>
+			<ul id="side-menu" class="left-align">
+		      <li><a href="/admin.php">Overview</a></li>
+		      <li><a href="/admin.php/catalogue">Catalogues</a></li>
 		      <li><a href="#!">Messages</a></li>
 		      <li><a href="#!">Settings</a></li>
 		    </ul>
 		</div>
-		<div class="col s9">
+		<div class="col s10">
 			<div>
 		    	<?=$this->section('content')?>
 		    </div>
