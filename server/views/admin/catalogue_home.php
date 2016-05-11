@@ -13,6 +13,31 @@
         <h3 class="panel-title">Create catalogue</h3>
       </div>
       <div class="panel-body">
+
+        <div class="alert alert-dismissible alert-success" role="alert">
+          ...
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="alert alert-dismissible alert-info" role="alert">
+          ...
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="alert alert-dismissible alert-warning" role="alert">
+          ...
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="alert alert-dismissible alert-danger" role="alert">
+          ...
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         
         <div>
 
