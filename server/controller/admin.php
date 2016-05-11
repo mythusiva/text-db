@@ -20,7 +20,8 @@ Request::setTrustedProxies($settings['trustedProxies']);
 
 $app->get('/', function () use ($app) {
 	$app['viewService']->addData([
-		'pageTitle' => 'Admin'
+		'pageTitle' => 'Admin',
+		'menuActive' => 'overview'
 	]);
 
     return $app['viewService']->render('admin/admin_home');
@@ -28,10 +29,21 @@ $app->get('/', function () use ($app) {
 
 $app->get('/catalogue', function() use ($app) {
 	$app['viewService']->addData([
-		'pageTitle' => 'Catalogue - Admin'
+		'pageTitle' => 'Catalogue - Admin',
+		'menuActive' => 'catalogue'
 	]);
 
 	return $app['viewService']->render('admin/catalogue_home');
+});
+
+
+$app->get('/message', function() use ($app) {
+	$app['viewService']->addData([
+		'pageTitle' => 'Message - Admin',
+		'menuActive' => 'message'
+	]);
+
+	return $app['viewService']->render('admin/message_home');
 });
 
 

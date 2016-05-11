@@ -1,5 +1,9 @@
 <?$this->layout('admin/base')?>
 
 <div class="row">
-	<div class="col s12"><h1>OVERVIEW</h1></div>
+	<div class="col-xs-12">
+		<div class="page-header">
+		  <h1>Overview <small>Dashboard of TextDB.</small></h1>
+		</div>
+	</div>
 </div>
