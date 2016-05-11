@@ -21,7 +21,7 @@
              messages. For example, you may want to create a catalogue for each feature of your application.</p>
           
           <div class="form-group">
-            <label for="inputMsgIdentifier">Name</label>
+            <label for="inputMsgIdentifier">Catalogue name:</label>
             <input type="text" class="form-control" id="inputMsgIdentifier" placeholder="myFeatureName/hompage/landingPage">
           </div>
 
