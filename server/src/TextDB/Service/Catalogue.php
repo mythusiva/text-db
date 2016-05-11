@@ -13,6 +13,8 @@ use TextDB\Model\Catalogue as CatalogueModel;
 class Catalogue extends BaseService
 {
 
+	const EXCEPTION_NULL_CATALOGUE_NAME 	 = 1;
+
 	/**
 	 * @var CatalogModel
 	 */
@@ -33,19 +35,33 @@ class Catalogue extends BaseService
 		$this->catalogueModel->createCatalogue($name);
 
 		$catalogue = $this->catalogueModel->getCatalogue($name);
-
 	}
 
 	/**
 	 * @param  string $name
 	 * @return CatalogueEntity
+	 * @throws \Exception 
 	 */
 	public function get($name) {
+		$this->validateCatalogueName($name);
 		return $this->catalogueModel->getCatalogue($name);
 	}
 
 	public function getList() {
 		return $this->catalogueModel->getCatalogueList();
+	}
+
+	private function validateCatalogueName($name) {
+
+		switch ($name) {
+			case empty($name):
+				throw new \Exception("The catalogue name cannot be empty.",self::EXCEPTION_NULL_CATALOGUE_NAME);
+				break;
+
+			default:
+				break;
+		}
+
 	}
 
 }

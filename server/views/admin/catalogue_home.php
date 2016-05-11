@@ -21,12 +21,12 @@
              messages. For example, you may want to create a catalogue for each feature of your application.</p>
           
           <div class="form-group">
-            <label for="inputMsgIdentifier">Catalogue name:</label>
-            <input type="text" class="form-control" id="inputMsgIdentifier" placeholder="myFeatureName/hompage/landingPage">
+            <label>Catalogue name:</label>
+            <input js-input-catalogue-name type="text" class="form-control" placeholder="myFeatureName/hompage/landingPage">
           </div>
 
           <div class="form-group">
-            <button type="button" class="btn btn-success">Create</button>
+            <button js-btn-create-catalogue type="button" class="btn btn-success">Create</button>
           </div>
 
         </div>
@@ -39,6 +39,22 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
+
+  $('[js-btn-create-catalogue]').click(function() {
+
+    var catalogue_name = $('[js-input-catalogue-name]').val();
+
+    $.ajax({
+      type: "POST",
+      url: '/admin.php/createCatalogue',
+      data: {name:catalogue_name},
+      success: function(response) {
+        console.log(response);
+      },
+      dataType: 'json'
+    });
+
+  });
 
 });
 </script>
