@@ -64,9 +64,13 @@ $app->get('/catalogue', function() use ($app) {
 
 
 $app->get('/message', function() use ($app) {
+
+  $catalogueList = $app['catalogueService']->getList();
+
 	$app['viewService']->addData([
 		'pageTitle' => 'Message - Admin',
-		'menuActive' => 'message'
+		'menuActive' => 'message',
+    'catalogueList' => $catalogueList 
 	]);
 
 	return $app['viewService']->render('admin/message_home');
@@ -93,6 +97,20 @@ $app->post('/createCatalogue', function(Request $request) use ($app) {
       'success' => false
     ], 400);
   }
+});
+
+$app->post('/createMessage', function(Request $request) use ($app) {
+  
+  $catalogueName = $request->get('catalogue_name');
+  $isPlural     = $request->get('is_plural_form');
+  $messageKey   = $request->get('message_key');
+  $messageText  = $request->get('message_text');
+
+  var_dump($messageKey);
+
+  return JsonResponse::create([
+    'success' => true
+  ], 200);
 
 });
 
