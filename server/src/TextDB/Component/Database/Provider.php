@@ -1,16 +1,16 @@
 <?php
 
-namespace TextDB\Provider;
+namespace TextDB\Component\Database;
 
-
+use TextDB\Provider\BaseProvider;
 use TextDB\Component\Database\Entity as DatabaseConfig;
 use \Database\Connectors\ConnectionFactory;
-use Database\Connection;
+use \Database\Connection;
 
 /**
 * 
 */
-class Storage extends BaseProvider
+class Provider extends BaseProvider
 {
 
 	/** 

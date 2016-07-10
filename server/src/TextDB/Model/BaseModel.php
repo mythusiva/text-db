@@ -27,7 +27,7 @@ class BaseModel
 	{
 		$this->dependencies = $dependencies;
 
-		$this->dbConnection = $this->dependencies['storageProvider']->getDB();
+		$this->dbConnection = $this->dependencies['databaseProvider']->getDB();
 	}
 
 	/**

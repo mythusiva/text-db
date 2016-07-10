@@ -5,8 +5,8 @@ define("VIEW_DIR","../views");
 
 use TextDB\Utils\Properties;
 use TextDB\Enum\PluralForms as PluralFormsEnum;
-use TextDB\Provider\Storage as StorageProvider;
-use TextDB\Entity\Database as DatabaseEntity;
+use TextDB\Component\Database\Provider as DatabaseProvider;
+use TextDB\Component\Database\Entity as DatabaseEntity;
 use TextDB\Component\Catalogue\Model as CatalogueModel;
 use TextDB\Component\Catalogue\Service as CatalogueService;
 use TextDB\Component\Message\Entity as MessageEntity;
@@ -27,9 +27,9 @@ $app['databaseEntity'] = function($c) {
   return new DatabaseEntity($c['databaseProperties']);
 };
 
-# StorageProvider is a shared resource.
-$app['storageProvider'] = $app->share(function($c) {
-  return new StorageProvider($c);
+# DatabaseProvider is a shared resource.
+$app['databaseProvider'] = $app->share(function($c) {
+  return new DatabaseProvider($c);
 });
 
 # Catalogue component
