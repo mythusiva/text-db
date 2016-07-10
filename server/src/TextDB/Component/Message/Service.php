@@ -2,7 +2,7 @@
 
 namespace TextDB\Component\Message;
 
-use TextDB\Service\BaseService;
+use TextDB\Component\Base\Service as BaseService;
 use TextDB\Component\Message\Entity as MessageEntity;
 use TextDB\Component\Message\Model as MessageModel;
 

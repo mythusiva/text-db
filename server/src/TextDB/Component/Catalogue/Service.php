@@ -3,7 +3,7 @@
 namespace TextDB\Component\Catalogue;
 
 
-use TextDB\Service\BaseService;
+use TextDB\Component\Base\Service as BaseService;
 use TextDB\Component\Catalogue\Entity as CatalogueEntity;
 use TextDB\Component\Catalogue\Model as CatalogueModel;
 

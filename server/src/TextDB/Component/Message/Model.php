@@ -2,7 +2,7 @@
 
 namespace TextDB\Component\Message;
 
-use TextDB\Model\BaseModel;
+use TextDB\Component\Base\Model as BaseModel;
 use TextDB\Component\Message\Entity as MessageEntity;
 use TextDB\Enum\LanguageCodes;
 

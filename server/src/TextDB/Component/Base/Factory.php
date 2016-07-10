@@ -1,14 +1,13 @@
 <?php
 
-namespace TextDB\Factory;
-
+namespace TextDB\Component\Base;
 
 use Pimple;
 
 /**
 * 
 */
-class BaseFactory
+class Factory
 {
   
   /**

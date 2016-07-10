@@ -1,14 +1,13 @@
 <?php
 
-namespace TextDB\Provider;
-
+namespace TextDB\Component\Base;
 
 use Pimple;
 
 /**
 * 
 */
-class BaseProvider
+class Provider
 {
 	
 	/**

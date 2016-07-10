@@ -2,7 +2,7 @@
 
 namespace TextDB\Component\Catalogue;
 
-use TextDB\Model\BaseModel;
+use TextDB\Component\Base\Model as BaseModel;
 use TextDB\Component\Catalogue\Entity as CatalogueEntity;
 
 /**

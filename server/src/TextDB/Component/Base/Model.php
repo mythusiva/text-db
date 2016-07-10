@@ -1,16 +1,15 @@
 <?php
 
-namespace TextDB\Model;
+namespace TextDB\Component\Base;
 
-
-use Database\Connection;
-use Pimple;
+use \Database\Connection;
+use \Pimple;
 use TextDB\Utils\Properties;
 
 /**
 * 
 */
-class BaseModel
+class Model
 {
 	/**
 	 * @var Pimple
