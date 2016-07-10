@@ -6,6 +6,7 @@ namespace TextDB\Model;
 use TextDB\Model\BaseModel;
 use TextDB\Provider\Storage as StorageProvider;
 use TextDB\Entity\Message as MessageEntity;
+use TextDB\Enum\LanguageCodes;
 
 /**
 * 
@@ -27,8 +28,13 @@ class Message extends BaseModel
 			'text' 						=> $message->text,
 			'locale' 					=> $message->locale,
 			'catalogue_name'  => $message->catalogueName,
-			'is_plural_form' 	=> $message->isPluralForm
+			'is_plural_form' 	=> $message->isPluralForm,
+			'date_created'		=> date(MYSQL_DATETIME_FORMAT),
+			'date_modified'		=> date(MYSQL_DATETIME_FORMAT),
 		];
+
+		LanguageCodes::assertExists($message->locale);
+
 		$this->dbConnection
 			 ->table('message')
 			 ->insertIgnore($data);
@@ -75,7 +81,6 @@ class Message extends BaseModel
  			'isPluralForm' => $row['is_plural_form']
 		]);
 		
-		# Maintained only by the DB triggers.
 		$messageEntity->dateCreated  = $row['date_created'];
 		$messageEntity->dateModified = $row['date_modified'];
 

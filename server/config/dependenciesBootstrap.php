@@ -19,6 +19,7 @@ $app['settings'] = function($c) use ($settings) {
 };
 
 # Database services
+define('MYSQL_DATETIME_FORMAT','Y-m-d H:i:s');
 $app['databaseProperties'] = function($c) {
   return new Properties($c['settings']['dbProperties']);
 };

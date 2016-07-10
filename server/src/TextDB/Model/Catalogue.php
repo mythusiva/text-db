@@ -45,7 +45,8 @@ class Catalogue extends BaseModel
 	 */
 	function createCatalogue($catalogueName) {
 		$data = [
-			'name' => $catalogueName
+			'name' => $catalogueName,
+			'date_created' => date(MYSQL_DATETIME_FORMAT)
 		];
 
 		$this->dbConnection
