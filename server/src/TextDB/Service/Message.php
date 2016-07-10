@@ -28,16 +28,12 @@ class Message extends BaseService
 		return $this->messageModel->createMessage($message);
 	}
 
-	/**
-	 * @param  string $name
-	 * @return MessageEntity
-	 */
-	public function get($name) {
-		return $this->messageModel->getCatalogue($name);
+	public function getList($limit=100) {
+		return $this->messageModel->getMessageList($limit);
 	}
 
-	public function getList() {
-		return $this->messageModel->getMessageList();
+	public function getByCatalogue($catalogueName) {
+		return $this->messageModel->getMessageListByCatalogue($catalogueName);
 	}
 
 }

@@ -48,14 +48,6 @@ $app['messageModel'] = $app->share(function($c) {
   return new MessageModel($c);
 });
 
-# CatalogueMessage component
-$app['catalogueMessageModel'] = $app->share(function($c) {
-  return new CatalogueMessageModel($c);
-});
-$app['catalogueMessageService'] = $app->share(function($c) {
-  return new CatalogueMessageService($c);
-});
-
 # View templating component
 $app['viewService'] = $app->share(function() {
   return new League\Plates\Engine(VIEW_DIR);

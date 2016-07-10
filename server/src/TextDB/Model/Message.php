@@ -58,9 +58,27 @@ class Message extends BaseModel
 	/**
 	 * @return MessageEntity[]
 	 */
-	public function getMessageList() {
+	public function getMessageListByCatalogue($catalogueName) {
 		$rows = $this->dbConnection
 					 ->table('message')
+					 ->where('catalogue_name','=',$catalogueName)
+					 ->get();
+
+		$messageList = [];
+		foreach ($rows as $rowArray) {
+			$messageList[] = $this->convertToEntity($rowArray);
+		}
+
+		return $messageList;
+	}
+
+	/**
+	 * @return MessageEntity[]
+	 */
+	public function getMessageList($limit) {
+		$rows = $this->dbConnection
+					 ->table('message')
+					 ->limit((int)$limit)
 					 ->get();
 
 		$messageList = [];

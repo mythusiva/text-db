@@ -6,14 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use TextDB\Utils\Properties;
-use TextDB\Provider\Storage as StorageProvider;
-use TextDB\Entity\Database as DatabaseEntity;
-use TextDB\Model\Catalogue as CatalogueModel;
-use TextDB\Service\Catalogue as CatalogueService;
 use TextDB\Entity\Message as MessageEntity;
-use TextDB\Enum\PluralForms as PluralFormsEnum;
-use TextDB\Service\Message as MessageService;
-use TextDB\Model\Message as MessageModel;
 
 ### APPLICATION ###
 $app = new Silex\Application();

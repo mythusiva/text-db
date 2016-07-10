@@ -39,7 +39,7 @@ $app->get('/', function () {
  * @return  MessageEntity[]	Returns a list of messageEntities.
  */
 $app->get('/fetchTextsByCatalogue/{catalogueName}', function(Silex\Application $app, $catalogueName) {
-	$listOfMessages = $app['catalogueMessageService']->getCatalogueMessages($catalogueName);
+	$listOfMessages = $app['messageService']->getByCatalogue($catalogueName);
 
 	$responseCode = APIResponse::HTTP_OK;
 	if(empty($listOfMessages)) {
