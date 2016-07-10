@@ -1,8 +1,6 @@
 <?php
 
 require __DIR__ . '/../vendor/autoload.php';
-include_once __DIR__ . '/../config/settings.php';
-
 
 use Symfony\Component\HttpFoundation\Request;
 use TextDB\Utils\Properties;
@@ -24,39 +22,7 @@ $app = new Silex\Application();
 $app['debug'] = true;
 
 ### DEPENDENCIES ###
-$app['settings'] = function($c) use ($settings) {
-	return $settings;
-};
-$app['databaseProperties'] = function($c) {
-	return new Properties($c['settings']['dbProperties']);
-};
-$app['databaseEntity'] = function($c) {
-	return new DatabaseEntity($c['databaseProperties']);
-};
-# StorageProvider is a shared resource.
-$app['storageProvider'] = $app->share(function($c) {
-	return new StorageProvider($c);
-});
-$app['catalogueModel'] = $app->share(function($c) {
-	return new CatalogueModel($c);
-});
-$app['catalogueService'] = $app->share(function($c) {
-	return new CatalogueService($c);
-});
-$app['messageModel'] = $app->share(function($c) {
-	return new MessageModel($c);
-});
-$app['messageService'] = $app->share(function($c) {
-	return new MessageService($c);
-});
-$app['catalogueMessageModel'] = $app->share(function($c) {
-	return new CatalogueMessageModel($c);
-});
-$app['catalogueMessageService'] = $app->share(function($c) {
-	return new CatalogueMessageService($c);
-});
-
-
+require_once('../config/dependenciesBootstrap.php');
 
 Request::setTrustedProxies($settings['trustedProxies']);
 

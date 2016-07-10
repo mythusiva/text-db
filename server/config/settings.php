@@ -1,6 +1,8 @@
 <?php
 
-$settings['defaultLocale'] = "en-US";
+use TextDB\Enum\LanguageCodes;
+
+$settings['defaultLocale'] = LanguageCodes::EN_US;
 
 /** 
  * If your application is hosted behind a reverse proxy at address $ip, 

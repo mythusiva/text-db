@@ -1,9 +1,12 @@
 <?
+use TextDB\Enum\LanguageCodes;
+use TextDB\Enum\PluralForms;
+
 $localeData = [
 	
 	# English US
-	'en-US' => [
-		'plurals' => ['one','other']
+	LanguageCodes::EN_US => [
+		'plurals' => [PluralForms::ONE,PluralForms::OTHER]
 	],
 
 

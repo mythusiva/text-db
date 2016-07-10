@@ -1,9 +1,6 @@
 <?php
 
 require __DIR__ . '/../vendor/autoload.php';
-include_once __DIR__ . '/../config/settings.php';
-
-define("VIEW_DIR","../views");
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,34 +21,7 @@ $app = new Silex\Application();
 $app['debug'] = true;
 
 ### DEPENDENCIES ###
-$app['settings'] = function($c) use ($settings) {
-  return $settings;
-};
-$app['databaseProperties'] = function($c) {
-  return new Properties($c['settings']['dbProperties']);
-};
-$app['databaseEntity'] = function($c) {
-  return new DatabaseEntity($c['databaseProperties']);
-};
-# StorageProvider is a shared resource.
-$app['storageProvider'] = $app->share(function($c) {
-  return new StorageProvider($c);
-});
-$app['catalogueModel'] = $app->share(function($c) {
-  return new CatalogueModel($c);
-});
-$app['catalogueService'] = $app->share(function($c) {
-  return new CatalogueService($c);
-});
-$app['messageService'] = $app->share(function($c) {
-  return new MessageService($c);
-});
-$app['messageModel'] = $app->share(function($c) {
-  return new MessageModel($c);
-});
-$app['viewService'] = $app->share(function() {
-  return new League\Plates\Engine(VIEW_DIR);
-});
+require_once('../config/dependenciesBootstrap.php');
 
 Request::setTrustedProxies($settings['trustedProxies']);
 

@@ -4,7 +4,7 @@ namespace TextDB\Enum;
 
 use CommerceGuys\Enum\AbstractEnum;
 
-class PluralForms use AbstractEnum 
+class PluralForms extends AbstractEnum 
 {
 	const ZERO = 'zero';
 	const ONE = 'one';
