@@ -23,14 +23,17 @@ class Message extends BaseModel
 	 */
 	public function createMessage(MessageEntity $message) {
 		$data = [
-			'identifier' 		=> $message->identifier,
-			'text' 				=> $message->text,
-			'locale' 			=> $message->locale,
-			'catalogue_name'  	=> $message->catalogueName
+			'identifier' 			=> $message->identifier,
+			'text' 						=> $message->text,
+			'locale' 					=> $message->locale,
+			'catalogue_name'  => $message->catalogueName,
+			'is_plural_form' 	=> $message->isPluralForm
 		];
 		$this->dbConnection
 			 ->table('message')
 			 ->insertIgnore($data);
+
+		return true;
 	}
 
 	/**
@@ -68,7 +71,8 @@ class Message extends BaseModel
  			'identifier'  	=> $row['identifier'],
  			'text' 		  	=> $row['text'],
  			'locale' 	  	=> $row['locale'],
- 			'catalogueName' => $row['catalogue_name']
+ 			'catalogueName' => $row['catalogue_name'],
+ 			'isPluralForm' => $row['is_plural_form']
 		]);
 		
 		# Maintained only by the DB triggers.

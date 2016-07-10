@@ -20,6 +20,7 @@ class Message
 		$this->text 		 = $properties->getValue('text','');
 		$this->locale 		 = $properties->getValue('locale','');
 		$this->catalogueName = $properties->getValue('catalogueName',null);
+		$this->isPluralForm = $properties->getValue('isPluralForm',0);
 	}
 
 	/** 
@@ -46,5 +47,10 @@ class Message
 	 * @var string The catalogue name is a foreign key.
 	 */
 	public $catalogueName;
+
+	/**
+	 * @var int For plural forms value is 1.
+	 */
+	public $isPluralForm;
 
 }

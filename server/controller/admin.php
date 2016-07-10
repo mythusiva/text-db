@@ -2,6 +2,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 include_once __DIR__ . '/../config/settings.php';
+
 define("VIEW_DIR","../views");
 
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,10 @@ use TextDB\Provider\Storage as StorageProvider;
 use TextDB\Entity\Database as DatabaseEntity;
 use TextDB\Model\Catalogue as CatalogueModel;
 use TextDB\Service\Catalogue as CatalogueService;
+use TextDB\Entity\Message as MessageEntity;
+use TextDB\Enum\PluralForms as PluralFormsEnum;
+use TextDB\Service\Message as MessageService;
+use TextDB\Model\Message as MessageModel;
 
 ### APPLICATION ###
 $app = new Silex\Application();
@@ -37,6 +42,12 @@ $app['catalogueModel'] = $app->share(function($c) {
 });
 $app['catalogueService'] = $app->share(function($c) {
   return new CatalogueService($c);
+});
+$app['messageService'] = $app->share(function($c) {
+  return new MessageService($c);
+});
+$app['messageModel'] = $app->share(function($c) {
+  return new MessageModel($c);
 });
 $app['viewService'] = $app->share(function() {
   return new League\Plates\Engine(VIEW_DIR);
@@ -101,12 +112,34 @@ $app->post('/createCatalogue', function(Request $request) use ($app) {
 
 $app->post('/createMessage', function(Request $request) use ($app) {
   
-  $catalogueName = $request->get('catalogue_name');
-  $isPlural     = $request->get('is_plural_form');
-  $messageKey   = $request->get('message_key');
-  $messageText  = $request->get('message_text');
+  $catalogueName  = $request->get('catalogue_name');
+  $isPlural       = $request->get('is_plural_form');
+  $messagesArray  = $request->get('messages');
 
-  var_dump($messageKey);
+  try {
+
+    foreach ($messagesArray as $msgKey => $msgText) {
+      $messageProperty = new Properties([
+        'identifier' => $msgKey,
+        'text' => $msgText,
+        'locale' => $app['settings']['defaultLocale'],
+        'catalogueName' => $catalogueName,
+        'isPluralForm' => ($isPlural === 'true') ? 1 : 0
+      ]);
+
+      $messageEntity = new MessageEntity($messageProperty);
+
+      var_dump($messageEntity);
+
+      $app['messageService']->create($messageEntity);
+    }
+
+  } catch (Exception $e) {
+    return JsonResponse::create([
+      'message' => $e->getMessage(),
+      'success' => false
+    ], 400);
+  }
 
   return JsonResponse::create([
     'success' => true

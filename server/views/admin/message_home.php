@@ -60,23 +60,12 @@
 
               <div js-form-block-plural hidden>
                 <div class="form-group">
-                  <label for="inputMsgKey" class="control-label">Message key - Singular:</label>
-                  <div class="input-group">
-                    <input name="messageKey[one]" type="text" class="form-control" id="inputMsgKeyPluralOne" placeholder="catalog_item_count">
-                    <div class="input-group-addon">_one</div>
-                  </div>
+                  <label for="inputMsgKey" class="control-label">Message key - Plural Form:</label>
+                  <input name="messageKeyPlural" type="text" class="form-control" id="inputMsgKeyPluralOne" placeholder="catalog_item_count">
                 </div>
                 <div class="form-group">
                   <label class="control-label">Message text - Singular:</label>
                   <textarea name="messageText[one]" class="form-control" rows="3"></textarea>
-                </div>
-
-                <div class="form-group">
-                  <label for="inputMsgKey" class="control-label">Message key - Plural:</label>
-                  <div class="input-group">
-                    <input name='messageKey[other]' type="text" class="form-control" id="inputMsgKeyPluralOther" placeholder="catalog_item_count">
-                    <div class="input-group-addon">_other</div>
-                  </div>
                 </div>
 
                 <div class="form-group">
@@ -109,32 +98,22 @@ $(document).ready(function() {
     var catalogue_name = $('[name="catalogueName"]').val();
     var message_key_normal = $('[name="messageKey"]').val();
     var message_text_normal = $('[name="messageText"]').val();
-    var message_key_one = $('[name="messageKey[one]"]').val();
+    var message_key_one = $('[name="messageKeyPlural"]').val() + '_one';
+    var message_key_other = $('[name="messageKeyPlural"]').val() + '_other';
     var message_text_one = $('[name="messageText[one]"]').val();
-    var message_key_other = $('[name="messageKey[other]"]').val();
     var message_text_other = $('[name="messageText[other]"]').val();
 
     var is_plural_form = isPluralFormEnabled();
 
     var message_key_array = {};
-    var message_text_array = {};
 
     if(is_plural_form) {
-      message_key_array = {
-        one:message_key_one,
-        other:message_key_other
-      };
-      message_text_array = {
-        one:message_text_one,
-        other:message_key_other
-      };
+
+      message_key_array[message_key_one] = message_text_one;
+      message_key_array[message_key_other] = message_text_other;
+
     } else {
-      message_key_array = {
-        normal:message_key_normal
-      };
-      message_text_array = {
-        normal:message_text_normal
-      };
+      message_key_array[message_key_normal] = message_text_normal;
     }
 
     $.ajax({
@@ -143,8 +122,7 @@ $(document).ready(function() {
       data: {
         catalogue_name:catalogue_name,
         is_plural_form:is_plural_form,
-        message_key:message_key_array,
-        message_text:message_text_array,
+        messages: message_key_array
       },
       success: function(response) {
         console.log(response);

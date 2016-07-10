@@ -1,97 +1,35 @@
---
--- File generated with SQLiteStudio v3.0.7 on Sun Apr 3 11:39:55 2016
---
--- Text encoding used: UTF-8
---
-PRAGMA foreign_keys = off;
-BEGIN TRANSACTION;
+-- SQLite 3 dump
 
--- Table: locale
-DROP TABLE IF EXISTS locale;
-
-CREATE TABLE locale (
-    locale VARCHAR (16)  PRIMARY KEY
-                         UNIQUE
-                         NOT NULL,
-    label  VARCHAR (255) NOT NULL
-);
-
-INSERT INTO locale (
-                       locale,
-                       label
-                   )
-                   VALUES (
-                       'en-US',
-                       'English (US)'
-                   );
+DROP TABLE IF EXISTS "catalogue";
+CREATE TABLE catalogue (name VARCHAR (255) UNIQUE NOT NULL PRIMARY KEY, date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL);
 
 
--- Table: catalogue
-DROP TABLE IF EXISTS catalogue;
+DROP TABLE IF EXISTS "language_code";
+CREATE TABLE language_code (language_code VARCHAR (16) PRIMARY KEY UNIQUE NOT NULL);
 
-CREATE TABLE catalogue (
-    catalogue_pk INTEGER       NOT NULL
-                               PRIMARY KEY AUTOINCREMENT,
-    name         VARCHAR (255) UNIQUE
-                               NOT NULL,
-    date_created TIMESTAMP     DEFAULT CURRENT_TIMESTAMP
-                               NOT NULL
+
+DROP TABLE IF EXISTS "message";
+CREATE TABLE "message" (
+  "message_pk" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+  "identifier" text NOT NULL,
+  "text" text NOT NULL,
+  "catalogue_name" text NOT NULL,
+  "locale" text NOT NULL,
+  "is_plural_form" integer NOT NULL DEFAULT '0',
+  "date_created" numeric NOT NULL DEFAULT 'CURRENT_TIMESTAMP',
+  "date_modified" numeric NOT NULL DEFAULT 'CURRENT_TIMESTAMP',
+  FOREIGN KEY ("locale") REFERENCES "language_code" ("language_code") ON DELETE NO ACTION ON UPDATE NO ACTION,
+  FOREIGN KEY ("catalogue_name") REFERENCES "catalogue" ("name") ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 
--- Table: context
-DROP TABLE IF EXISTS context;
-
-CREATE TABLE context (
-    context_pk   INTEGER   NOT NULL
-                           PRIMARY KEY AUTOINCREMENT,
-    text         TEXT      NOT NULL,
-    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                           NOT NULL
-);
-
-
--- Table: message
-DROP TABLE IF EXISTS message;
-
-CREATE TABLE message (
-    message_pk    INTEGER       PRIMARY KEY AUTOINCREMENT
-                                NOT NULL,
-    identifier    VARCHAR (255) NOT NULL,
-    text          TEXT          NOT NULL,
-    catalogue_fk  INTEGER       NOT NULL
-                                REFERENCES catalogue (catalogue_pk),
-    locale        VARCHAR (16)  NOT NULL
-                                REFERENCES locale (locale),
-    date_created  TIMESTAMP     DEFAULT CURRENT_TIMESTAMP
-                                NOT NULL,
-    date_modified TIMESTAMP     DEFAULT CURRENT_TIMESTAMP
-                                NOT NULL
-);
-
-
--- Index: IDX_MESSAGE_
-DROP INDEX IF EXISTS IDX_MESSAGE_;
-
-CREATE UNIQUE INDEX IDX_MESSAGE_ ON message (
-    catalogue_fk ASC,
-    identifier ASC,
-    locale ASC
-);
-
-
--- Trigger: ON_TBL_MESSAGE_date_modified
-DROP TRIGGER IF EXISTS ON_TBL_MESSAGE_date_modified;
-CREATE TRIGGER ON_TBL_MESSAGE_date_modified
-         AFTER UPDATE
-            ON message
-      FOR EACH ROW
+DELIMITER ;;
+CREATE TRIGGER "message_ai" AFTER  INSERT ON "message"
 BEGIN
-    UPDATE message
-       SET date_modified = NOW() 
-     WHERE message_pk = old.message_pk;
-END;
+  UPDATE message SET date_modified=CURRENT_TIMESTAMP WHERE message_pk=NEW.message_pk;
+END;;
+
+DELIMITER ;
 
 
-COMMIT TRANSACTION;
-PRAGMA foreign_keys = on;
+-- 

@@ -2,7 +2,6 @@
 
 namespace TextDB\Service;
 
-
 use TextDB\Service\BaseService;
 use TextDB\Entity\Message as MessageEntity;
 use TextDB\Model\Message as MessageModel;
@@ -23,6 +22,10 @@ class Message extends BaseService
 		parent::__construct($dependencies);
 
 		$this->messageModel = $this->dependencies['messageModel'];
+	}
+
+	public function create(MessageEntity $message) {
+		return $this->messageModel->createMessage($message);
 	}
 
 	/**

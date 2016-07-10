@@ -15,5 +15,6 @@ return array(
     'Silex\\' => array($vendorDir . '/silex/silex/src/Silex'),
     'League\\Plates\\' => array($vendorDir . '/league/plates/src'),
     'Database\\' => array($vendorDir . '/mrjgreen/database/src'),
+    'CommerceGuys\\Enum\\' => array($vendorDir . '/commerceguys/enum/src'),
     'Cake\\Collection\\' => array($vendorDir . '/cakephp/collection'),
 );
