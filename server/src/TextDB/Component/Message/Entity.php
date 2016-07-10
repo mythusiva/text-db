@@ -1,7 +1,6 @@
 <?php
 
-namespace TextDB\Entity;
-
+namespace TextDB\Component\Message;
 
 use TextDB\Utils\Properties;
 use TextDB\Enum\LanguageCodes;
@@ -9,7 +8,7 @@ use TextDB\Enum\LanguageCodes;
 /**
 * 
 */
-class Message
+class Entity
 {
 
 	const EXCEPTION_EMPTY_IDENTIFIER = 0;

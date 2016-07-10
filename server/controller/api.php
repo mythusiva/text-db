@@ -3,18 +3,16 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse as APIResponse;
 use TextDB\Utils\Properties;
 use TextDB\Provider\Storage as StorageProvider;
 use TextDB\Entity\Database as DatabaseEntity;
-use TextDB\Model\CatalogueMessage as CatalogueMessageModel;
-use TextDB\Service\CatalogueMessage as CatalogueMessageService;
-use TextDB\Entity\Message as MessageEntity;
-use TextDB\Model\Message as MessageModel;
-use TextDB\Service\Message as MessageService;
-use TextDB\Entity\Catalogue as CatalogueEntity;
-use TextDB\Model\Catalogue as CatalogueModel;
-use TextDB\Service\Catalogue as CatalogueService;
-use Symfony\Component\HttpFoundation\JsonResponse as APIResponse;
+use TextDB\Component\Message\Entity as MessageEntity;
+use TextDB\Component\Message\Model as MessageModel;
+use TextDB\Component\Message\Service as MessageService;
+use TextDB\Component\Catalogue\Entity as CatalogueEntity;
+use TextDB\Component\Catalogue\Model as CatalogueModel;
+use TextDB\Component\Catalogue\Service as CatalogueService;
 
 ### APPLICATION ###
 $app = new Silex\Application();

@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse as APIResponse;
 
 use TextDB\Utils\Properties;
-use TextDB\Entity\Message as MessageEntity;
+use TextDB\Component\Message\Entity as MessageEntity;
 
 ### APPLICATION ###
 $app = new Silex\Application();

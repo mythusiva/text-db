@@ -1,15 +1,15 @@
 <?php
 
-namespace TextDB\Service;
+namespace TextDB\Component\Message;
 
 use TextDB\Service\BaseService;
-use TextDB\Entity\Message as MessageEntity;
-use TextDB\Model\Message as MessageModel;
+use TextDB\Component\Message\Entity as MessageEntity;
+use TextDB\Component\Message\Model as MessageModel;
 
 /**
 * 
 */
-class Message extends BaseService
+class Service extends BaseService
 {
 	/**
 	 * @var MessageModel

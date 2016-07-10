@@ -1,15 +1,14 @@
 <?php 
 
-namespace TextDB\Model;
-
+namespace TextDB\Component\Catalogue;
 
 use TextDB\Model\BaseModel;
-use TextDB\Entity\Catalogue as CatalogueEntity;
+use TextDB\Component\Catalogue\Entity as CatalogueEntity;
 
 /**
 * 
 */
-class Catalogue extends BaseModel
+class Model extends BaseModel
 {
 
 	function __construct($dependencies)

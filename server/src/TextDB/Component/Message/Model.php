@@ -1,17 +1,16 @@
 <?php
 
-namespace TextDB\Model;
-
+namespace TextDB\Component\Message;
 
 use TextDB\Model\BaseModel;
 use TextDB\Provider\Storage as StorageProvider;
-use TextDB\Entity\Message as MessageEntity;
+use TextDB\Component\Message\Entity as MessageEntity;
 use TextDB\Enum\LanguageCodes;
 
 /**
 * 
 */
-class Message extends BaseModel
+class Model extends BaseModel
 {
 
 	function __construct($dependencies)

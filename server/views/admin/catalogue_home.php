@@ -14,7 +14,7 @@
       </div>
       <div class="panel-body">
 
-          <?=$this->insert('admin/snippets/alertBoxes')?>
+          <?=$this->insert('admin/snippets/alertBoxes',['id'=>'createCatalogue'])?>
 
        		<p>A catalogue is like a namespace that holds a list of messages. The catalogue will provide some
              context as to how the messages are related. Create new catalogues to store contextually related 
