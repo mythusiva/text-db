@@ -11,7 +11,6 @@ use TextDB\Model\Message as MessageModel;
 */
 class Message extends BaseService
 {
-
 	/**
 	 * @var MessageModel
 	 */
@@ -25,6 +24,7 @@ class Message extends BaseService
 	}
 
 	public function create(MessageEntity $message) {
+		$message->validate();
 		return $this->messageModel->createMessage($message);
 	}
 

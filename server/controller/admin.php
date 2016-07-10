@@ -3,7 +3,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\JsonResponse as APIResponse;
 
 use TextDB\Utils\Properties;
 use TextDB\Entity\Message as MessageEntity;
@@ -59,17 +59,17 @@ $app->post('/createCatalogue', function(Request $request) use ($app) {
 
     $app['catalogueService']->create($catalogueName);
     
-    return JsonResponse::create([
+    return APIResponse::create([
       'catalogueName' => $catalogueName,
       'success' => true
-    ], 200);
+    ], APIResponse::HTTP_OK);
 
   } catch (Exception $e) {
-    return JsonResponse::create([
+    return APIResponse::create([
       'catalogueName' => $catalogueName,
       'message' => $e->getMessage(),
       'success' => false
-    ], 400);
+    ], APIResponse::HTTP_BAD_REQUEST);
   }
 });
 
@@ -87,26 +87,24 @@ $app->post('/createMessage', function(Request $request) use ($app) {
         'text' => $msgText,
         'locale' => $app['settings']['defaultLocale'],
         'catalogueName' => $catalogueName,
-        'isPluralForm' => ($isPlural === 'true') ? 1 : 0
+        'isPluralForm' => ($isPlural === 'true') ? MessageEntity::PLURAL_FORM_ON : MessageEntity::PLURAL_FORM_OFF
       ]);
 
       $messageEntity = new MessageEntity($messageProperty);
-
-      var_dump($messageEntity);
 
       $app['messageService']->create($messageEntity);
     }
 
   } catch (Exception $e) {
-    return JsonResponse::create([
+    return APIResponse::create([
       'message' => $e->getMessage(),
       'success' => false
-    ], 400);
+    ], APIResponse::HTTP_BAD_REQUEST);
   }
 
-  return JsonResponse::create([
+  return APIResponse::create([
     'success' => true
-  ], 200);
+  ], APIResponse::HTTP_OK);
 
 });
 

@@ -14,7 +14,7 @@
           </div>
           <div class="panel-body">
 
-            <?=$this->insert('admin/snippets/alertBoxes')?>
+            <?=$this->insert('admin/snippets/alertBoxes',['id'=>'createMessage'])?>
             
             <div>
 
@@ -124,8 +124,13 @@ $(document).ready(function() {
         is_plural_form:is_plural_form,
         messages: message_key_array
       },
-      success: function(response) {
-        console.log(response);
+      complete: function(rawResponse) {
+        response = rawResponse.responseJSON;
+        if(response.success) {
+          showAlert('createMessage','success','Successfully created!');
+        } else {
+          showAlert('createMessage','danger',response.message);
+        }
       },
       dataType: 'json'
     });
