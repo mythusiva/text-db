@@ -28,14 +28,4 @@ class Model
 
 		$this->dbConnection = $this->dependencies['databaseProvider']->getDB();
 	}
-
-	/**
-	 * @param  string $entityClass
-	 * @param  array $properties
-	 * @return class The instance of the entityClass
-	 */
-	protected function convertToEntity($entityClass,$properties) {
-		$propertiesObj = new Properties($properties);
-		return new $entityClass($propertiesObj);
-	}
 }

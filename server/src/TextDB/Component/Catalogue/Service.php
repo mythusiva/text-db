@@ -2,10 +2,10 @@
 
 namespace TextDB\Component\Catalogue;
 
-
 use TextDB\Component\Base\Service as BaseService;
 use TextDB\Component\Catalogue\Entity as CatalogueEntity;
 use TextDB\Component\Catalogue\Model as CatalogueModel;
+use TextDB\Component\Catalogue\ListItemEntity as CatalogueListItemEntity;
 
 /**
 * 
@@ -41,7 +41,10 @@ class Service extends BaseService
 		return $this->catalogueModel->getCatalogue($name);
 	}
 
-	public function getList() {
+	/**
+	 * @return CatalogueListItemEntity[]
+	 */
+	public function getListItems() {
 		return $this->catalogueModel->getCatalogueList();
 	}
 

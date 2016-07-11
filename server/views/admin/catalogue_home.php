@@ -38,20 +38,22 @@
             <tr>
               <th>Name</th>
               <th>Date created</th>
-              <th>Strings count</th>
+              <th>Number of texts</th>
               <th></th>
             </tr>  
           </thead>
           <tbody>
+            <?foreach($catalogueListItems as $catalogueListItemEntity):?>
             <tr>
-              <td>Test</td>
-              <td>Date</td>
-              <td>14</td>
+              <td><?=$catalogueListItemEntity->catalogueName?></td>
+              <td><?=$catalogueListItemEntity->dateCreated?></td>
+              <td><?=$catalogueListItemEntity->textsCount?></td>
               <td>
                 <a class="btn btn-xs btn-default">edit</a>
                 <a class="btn btn-xs btn-default">share</a>
               </td>
             </tr>
+            <?endforeach;?>
           </tbody>
         </table>
         <div class="form-group">

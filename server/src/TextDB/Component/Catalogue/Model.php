@@ -4,6 +4,8 @@ namespace TextDB\Component\Catalogue;
 
 use TextDB\Component\Base\Model as BaseModel;
 use TextDB\Component\Catalogue\Entity as CatalogueEntity;
+use TextDB\Utils\EntityHelper;
+use TextDB\Component\Catalogue\ListItemEntity as CatalogueListItemEntity;
 
 /**
 * 
@@ -28,12 +30,22 @@ class Model extends BaseModel
 
 	function getCatalogueList() {
 		$rows = $this->dbConnection
-					 ->table('catalogue')
-					 ->get();
+					 ->fetchAll('SELECT c.*,count(c.name) as num_texts
+								FROM catalogue c
+								JOIN message m ON c.name = m.catalogue_name
+								GROUP BY c.name');
 
 		$calalogueList = [];
 		foreach ($rows as $rowArray) {
-			$catalogueList[] = $this->convertToEntity($rowArray);
+			$catalogueListItemEntity = EntityHelper::createEntity(
+				CatalogueListItemEntity::class, 
+				[
+					'catalogueName' => $rowArray['name'],
+					'textsCount' => $rowArray['num_texts']	
+				]
+			);
+			$catalogueListItemEntity->dateCreated = $rowArray['date_created'];
+			$catalogueList[] = $catalogueListItemEntity;
 		}
 
 		return $catalogueList;
@@ -51,16 +63,6 @@ class Model extends BaseModel
 		$this->dbConnection
 			->table('catalogue')
 			->insertIgnore($data);
-	}
-
-
-	protected function convertToEntity($row) {
-		$catalogueEntity = parent::convertToEntity(CatalogueEntity::class,[
- 			'catalogueName' => $row['name']
-		]);
-		$catalogueEntity->dateCreated = $row['date_created'];
-
-		return $catalogueEntity;
 	}
 
 }

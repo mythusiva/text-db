@@ -29,9 +29,11 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('/catalogue', function() use ($app) {
+  $catalogueListItems = $app['catalogueService']->getListItems();
 	$app['viewService']->addData([
 		'pageTitle' => 'Catalogue - Admin',
-		'menuActive' => 'catalogue'
+		'menuActive' => 'catalogue',
+    'catalogueListItems' => $catalogueListItems
 	]);
 
 	return $app['viewService']->render('admin/catalogue_home');

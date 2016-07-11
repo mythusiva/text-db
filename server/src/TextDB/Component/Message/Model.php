@@ -5,6 +5,7 @@ namespace TextDB\Component\Message;
 use TextDB\Component\Base\Model as BaseModel;
 use TextDB\Component\Message\Entity as MessageEntity;
 use TextDB\Enum\LanguageCodes;
+use TextDB\Utils\EntityHelper;
 
 /**
 * 
@@ -50,7 +51,18 @@ class Model extends BaseModel
 					->where('identifier','=',$messageIdentifier)
 					->first();
 
-		return $this->convertToEntity($row);
+		$messageEntity = EntityHelper::createEntity(MessageEntity::class,[
+ 			'messagePK'   	=> $row['message_pk'],
+ 			'identifier'  	=> $row['identifier'],
+ 			'text' 		  	=> $row['text'],
+ 			'locale' 	  	=> $row['locale'],
+ 			'catalogueName' => $row['catalogue_name'],
+ 			'isPluralForm' => $row['is_plural_form']
+		]);
+		$messageEntity->dateCreated  = $row['date_created'];
+		$messageEntity->dateModified = $row['date_modified'];
+
+		return $messageEntity;
 	}
 
 	/**
@@ -64,7 +76,17 @@ class Model extends BaseModel
 
 		$messageList = [];
 		foreach ($rows as $rowArray) {
-			$messageList[] = $this->convertToEntity($rowArray);
+			$messageEntity = EntityHelper::createEntity(MessageEntity::class,[
+	 			'messagePK'   	=> $rowArray['message_pk'],
+	 			'identifier'  	=> $rowArray['identifier'],
+	 			'text' 		  	=> $rowArray['text'],
+	 			'locale' 	  	=> $rowArray['locale'],
+	 			'catalogueName' => $rowArray['catalogue_name'],
+	 			'isPluralForm' => $rowArray['is_plural_form']
+			]);
+			$messageEntity->dateCreated  = $rowArray['date_created'];
+			$messageEntity->dateModified = $rowArray['date_modified'];
+			$messageList[] = $messageEntity;
 		}
 
 		return $messageList;
@@ -81,26 +103,20 @@ class Model extends BaseModel
 
 		$messageList = [];
 		foreach ($rows as $rowArray) {
-			$messageList[] = $this->convertToEntity($rowArray);
+			$messageEntity = EntityHelper::createEntity(MessageEntity::class,[
+	 			'messagePK'   	=> $rowArray['message_pk'],
+	 			'identifier'  	=> $rowArray['identifier'],
+	 			'text' 		  	=> $rowArray['text'],
+	 			'locale' 	  	=> $rowArray['locale'],
+	 			'catalogueName' => $rowArray['catalogue_name'],
+	 			'isPluralForm' => $rowArray['is_plural_form']
+			]);
+			$messageEntity->dateCreated  = $rowArray['date_created'];
+			$messageEntity->dateModified = $rowArray['date_modified'];
+			$messageList[] = $messageEntity;
 		}
 
 		return $messageList;
-	}
-
-	protected function convertToEntity($row) {
-		$messageEntity = parent::convertToEntity(MessageEntity::class,[
- 			'messagePK'   	=> $row['message_pk'],
- 			'identifier'  	=> $row['identifier'],
- 			'text' 		  	=> $row['text'],
- 			'locale' 	  	=> $row['locale'],
- 			'catalogueName' => $row['catalogue_name'],
- 			'isPluralForm' => $row['is_plural_form']
-		]);
-		
-		$messageEntity->dateCreated  = $row['date_created'];
-		$messageEntity->dateModified = $row['date_modified'];
-
-		return $messageEntity;
 	}
 
 }
