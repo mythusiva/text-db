@@ -41,7 +41,7 @@
                 <div class="checkbox">
                   <label>
                     <input name="isPlural" js-checkbox-plural-forms type="checkbox" value="1">
-                    This text has plural forms.
+                    This message has plural forms.
                   </label>
                 </div>
               </div>
@@ -81,6 +81,36 @@
             </div>
 
 
+            <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Recent messages</h3>
+          </div>
+          <div class="panel-body">
+            <p></p>
+            <table class="table table-condensed table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>Identifier</th>
+                  <th>Text</th>
+                  <th>Catalogue name</th>
+                  <th>Locale</th>
+                  <th></th>
+                </tr>  
+              </thead>
+              <tbody>
+                <?foreach($messageListItems as $messageEntity):?>
+                <tr>
+                  <td><?=$messageEntity->identifier?></td>
+                  <td><?=$messageEntity->text?></td>
+                  <td><?=$messageEntity->catalogueName?></td>
+                  <td><?=$messageEntity->locale?></td>
+                  <td>
+                    <a class="btn btn-xs btn-default">edit</a>
+                  </td>
+                </tr>
+                <?endforeach;?>
+              </tbody>
+            </table>
           </div>
         </div>
 

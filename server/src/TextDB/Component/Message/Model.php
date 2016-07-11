@@ -119,4 +119,31 @@ class Model extends BaseModel
 		return $messageList;
 	}
 
+	/**
+	 * @return MessageEntity[]
+	 */
+	public function getLastModifiedList($limit) {
+		$rows = $this->dbConnection
+					 ->fetchAll("SELECT *
+					 			FROM message 
+					 			ORDER BY date_modified
+					 			LIMIT {$limit}");
+
+		$messageList = [];
+		foreach ($rows as $rowArray) {
+			$messageEntity = EntityHelper::createEntity(MessageEntity::class,[
+	 			'messagePK'   	=> $rowArray['message_pk'],
+	 			'identifier'  	=> $rowArray['identifier'],
+	 			'text' 		  	=> $rowArray['text'],
+	 			'locale' 	  	=> $rowArray['locale'],
+	 			'catalogueName' => $rowArray['catalogue_name'],
+	 			'isPluralForm' => $rowArray['is_plural_form']
+			]);
+			$messageEntity->dateCreated  = $rowArray['date_created'];
+			$messageEntity->dateModified = $rowArray['date_modified'];
+			$messageList[] = $messageEntity;
+		}
+
+		return $messageList;
+	}
 }

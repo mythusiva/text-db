@@ -38,7 +38,7 @@
             <tr>
               <th>Name</th>
               <th>Date created</th>
-              <th>Number of texts</th>
+              <th>Messages</th>
               <th></th>
             </tr>  
           </thead>

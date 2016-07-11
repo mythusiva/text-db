@@ -43,11 +43,13 @@ $app->get('/catalogue', function() use ($app) {
 $app->get('/message', function() use ($app) {
 
   $catalogueList = $app['catalogueService']->getListItems();
+  $messageListItems = $app['messageService']->getLastModifiedMessages();
 
 	$app['viewService']->addData([
 		'pageTitle' => 'Message - Admin',
 		'menuActive' => 'message',
-    'catalogueList' => $catalogueList 
+    'catalogueList' => $catalogueList,
+    'messageListItems' => $messageListItems
 	]);
 
 	return $app['viewService']->render('admin/message_home');

@@ -32,6 +32,10 @@ class Service extends BaseService
 		return $this->messageModel->getMessageList($limit);
 	}
 
+	public function getLastModifiedMessages($limit=100) {
+		return $this->messageModel->getLastModifiedList($limit);
+	}
+
 	public function getByCatalogue($catalogueName) {
 		return $this->messageModel->getMessageListByCatalogue($catalogueName);
 	}
