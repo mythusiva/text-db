@@ -26,13 +26,10 @@ class Service extends BaseService
 	}
 
 	/**
-	 * @param string $name
+	 * @param CatalogueEntity $catalogue
 	 */
-	public function create($name) {
-
-		$this->catalogueModel->createCatalogue($name);
-
-		$catalogue = $this->catalogueModel->getCatalogue($name);
+	public function create(CatalogueEntity $catalogue) {
+		$this->catalogueModel->createCatalogue($catalogue);
 	}
 
 	/**

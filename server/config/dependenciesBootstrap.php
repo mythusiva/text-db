@@ -1,7 +1,10 @@
 <?
+# Include system settings file
 include_once __DIR__ . '/../config/settings.php';
 
+# Global constants
 define("VIEW_DIR","../views");
+define('MYSQL_DATETIME_FORMAT','Y-m-d H:i:s');
 
 use TextDB\Utils\Properties;
 use TextDB\Enum\PluralForms as PluralFormsEnum;
@@ -19,7 +22,6 @@ $app['settings'] = function($c) use ($settings) {
 };
 
 # Database services
-define('MYSQL_DATETIME_FORMAT','Y-m-d H:i:s');
 $app['databaseProperties'] = function($c) {
   return new Properties($c['settings']['dbProperties']);
 };

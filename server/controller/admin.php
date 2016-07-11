@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse as APIResponse;
 
 use TextDB\Utils\Properties;
 use TextDB\Component\Message\Entity as MessageEntity;
+use TextDB\Component\Catalogue\Entity as CatalogueEntity;
 
 ### APPLICATION ###
 $app = new Silex\Application();
@@ -56,17 +57,20 @@ $app->post('/createCatalogue', function(Request $request) use ($app) {
 	$catalogueName = $request->get('name');
 
   try {
+    $catalogueProperty = new Properties([
+      'catalogueName' => $catalogueName
+    ]);
 
-    $app['catalogueService']->create($catalogueName);
+    $catalogueEntity = new CatalogueEntity($catalogueProperty);
+
+    $app['catalogueService']->create($catalogueEntity);
     
     return APIResponse::create([
-      'catalogueName' => $catalogueName,
       'success' => true
     ], APIResponse::HTTP_OK);
 
   } catch (Exception $e) {
     return APIResponse::create([
-      'catalogueName' => $catalogueName,
       'message' => $e->getMessage(),
       'success' => false
     ], APIResponse::HTTP_BAD_REQUEST);

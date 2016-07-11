@@ -40,11 +40,11 @@ class Model extends BaseModel
 	}
 
 	/**
-	 * @param  string $catalogueName
+	 * @param  CatalogueEntity $catalogue
 	 */
-	function createCatalogue($catalogueName) {
+	function createCatalogue(CatalogueEntity $catalogue) {
 		$data = [
-			'name' => $catalogueName,
+			'name' => $catalogue->catalogueName,
 			'date_created' => date(MYSQL_DATETIME_FORMAT)
 		];
 
@@ -58,7 +58,6 @@ class Model extends BaseModel
 		$catalogueEntity = parent::convertToEntity(CatalogueEntity::class,[
  			'catalogueName' => $row['name']
 		]);
-		# Maintained only by the DB triggers.
 		$catalogueEntity->dateCreated = $row['date_created'];
 
 		return $catalogueEntity;

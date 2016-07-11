@@ -13,11 +13,11 @@ class Entity
 	const EXCEPTION_EMPTY_CATALOGUE_NAME = 0;
 
 	/**
-	 * @param array
+	 * @param Properties
 	 */
 	function __construct(Properties $properties)
 	{
-		$this->catalogueName 	= $properties->getValue('catalogueName',null);
+		$this->catalogueName = $properties->getValue('catalogueName',null);
 	}
 
 	/**
