@@ -42,7 +42,7 @@ $app->get('/catalogue', function() use ($app) {
 
 $app->get('/message', function() use ($app) {
 
-  $catalogueList = $app['catalogueService']->getList();
+  $catalogueList = $app['catalogueService']->getListItems();
 
 	$app['viewService']->addData([
 		'pageTitle' => 'Message - Admin',
