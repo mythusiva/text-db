@@ -30,10 +30,11 @@ class Model extends BaseModel
 
 	function getCatalogueList() {
 		$rows = $this->dbConnection
-					 ->fetchAll('SELECT c.*,count(c.name) as num_texts
+					 ->fetchAll('SELECT c.*, coalesce(count(m.catalogue_name),0) as num_texts
 								FROM catalogue c
-								JOIN message m ON c.name = m.catalogue_name
-								GROUP BY c.name');
+								LEFT JOIN message m ON c.name = m.catalogue_name
+								GROUP BY c.name
+								ORDER BY c.date_created DESC');
 
 		$calalogueList = [];
 		foreach ($rows as $rowArray) {
