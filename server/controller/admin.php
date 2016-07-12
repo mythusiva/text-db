@@ -32,7 +32,7 @@ $app->get('/catalogue', function() use ($app) {
   $catalogueListItems = $app['catalogueService']->getListItems();
 	$app['viewService']->addData([
 		'pageTitle' => 'Catalogue - Admin',
-		'menuActive' => 'catalogue',
+		'menuActive' => 'catalogue-add',
     'catalogueListItems' => $catalogueListItems
 	]);
 
@@ -47,7 +47,7 @@ $app->get('/message', function() use ($app) {
 
 	$app['viewService']->addData([
 		'pageTitle' => 'Message - Admin',
-		'menuActive' => 'message',
+		'menuActive' => 'message-add',
     'catalogueList' => $catalogueList,
     'messageListItems' => $messageListItems
 	]);
