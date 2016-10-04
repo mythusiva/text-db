@@ -14,23 +14,23 @@
           </div>
           <div class="panel-body">
 
-            <?=$this->insert('admin/snippets/alertBoxes',['id'=>'createMessage'])?>
-            
+            <?=$this->insert('admin/snippets/alertBoxes', ['id' => 'createMessage'])?>
+
             <div>
 
               <p>
-                Create a new message string that will be used by your application. 
+                Create a new message string that will be used by your application.
                 The message key is a string or message key that will be used to reference the text.
-                The message id along with the locale will form the arguments of the request to textDB to 
+                The message id along with the locale will form the arguments of the request to textDB to
                 retrieve a localized string.
               </p>
-              
+
               <div class="form-group">
                 <label class="control-label">Assign to catalogue:</label>
                 <select name="catalogueName" class="form-control">
-                  <?foreach ($catalogueList as $catalogueEntity):?>
-                  <option value="<?=$catalogueEntity->catalogueName?>">
-                    <?=$catalogueEntity->catalogueName?>
+                  <?foreach ($catalogueList as $catalogueEntity): ?>
+                  <option value="<?=$catalogueEntity->catalogueNamespace?>">
+                    <?=$catalogueEntity->catalogueNamespace?>
                   </option>
                   <?endforeach;?>
                 </select>
@@ -97,10 +97,10 @@
                   <th>Catalogue name</th>
                   <th>Locale</th>
                   <th></th>
-                </tr>  
+                </tr>
               </thead>
               <tbody>
-                <?foreach($messageListItems as $messageEntity):?>
+                <?foreach ($messageListItems as $messageEntity): ?>
                 <tr>
                   <td><?=$messageEntity->identifier?></td>
                   <td><?=$messageEntity->text?></td>

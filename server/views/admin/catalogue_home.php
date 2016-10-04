@@ -13,9 +13,9 @@
         <h3 class="panel-title">Create catalogue</h3>
       </div>
       <div class="panel-body">
-        <?=$this->insert('admin/snippets/alertBoxes',['id'=>'createCatalogue'])?>
+        <?=$this->insert('admin/snippets/alertBoxes', ['id' => 'createCatalogue'])?>
      		<p>A catalogue is like a namespace that holds a list of messages. The catalogue will provide some
-           context as to how the messages are related. Create new catalogues to store contextually related 
+           context as to how the messages are related. Create new catalogues to store contextually related
            messages. For example, you may want to create a catalogue for each feature of your application.</p>
         <div class="form-group">
           <label>Catalogue name:</label>
@@ -40,14 +40,14 @@
               <th>Date created</th>
               <th>Messages</th>
               <th></th>
-            </tr>  
+            </tr>
           </thead>
           <tbody>
-            <?foreach($catalogueListItems as $catalogueListItemEntity):?>
+            <?foreach ($catalogueListItems as $catalogueListItemEntity): ?>
             <tr>
-              <td><?=$catalogueListItemEntity->catalogueName?></td>
+              <td><?=$catalogueListItemEntity->catalogueNamespace?></td>
               <td><?=$catalogueListItemEntity->dateCreated?></td>
-              <td><?=$catalogueListItemEntity->textsCount?></td>
+              <td><?=$catalogueListItemEntity->totalMessagesCount?></td>
               <td>
                 <a class="btn btn-xs btn-default">edit</a>
                 <a class="btn btn-xs btn-default">share</a>
